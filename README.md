@@ -1,4 +1,8 @@
 # gocalc
 Small calculator written in Go.
 
-The author's intention of this project is to learn the Go language.
+My first Go program to practice the language. 
+
+## Usage 
+
+This initial version of the calculator relies on a postfix evaluation. 
