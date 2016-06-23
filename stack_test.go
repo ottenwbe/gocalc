@@ -18,36 +18,35 @@ import (
 	"testing"
 )
 
-
 func TestEmptyStackPop(t *testing.T) {
-	stack := new (Stack)
-	_,err := stack.pop()
-	if (err == nil) {
+	stack := new(Stack)
+	_, err := stack.pop()
+	if err == nil {
 		t.Error("Expected error, however, no error occurred")
 	}
 }
 
 func TestStackPushPop(t *testing.T) {
-	stack := new (Stack)
+	stack := new(Stack)
 	testVal := 5.0
 	stack.push(testVal)
-	resultVal,_ := stack.pop()
-	if (resultVal != testVal) {
+	resultVal, _ := stack.pop()
+	if resultVal != testVal {
 		t.Error("Expected error, however, no error occurred")
 	}
 }
 
 func TestStackSize(t *testing.T) {
-	stack := new (Stack)
+	stack := new(Stack)
 	testVal := 5.0
 	stack.push(testVal)
-	if (stack.size() != 1) {
+	if stack.size() != 1 {
 		t.Error("Length of stack was not correctly calculated")
 	}
 }
 
 func TestEmptyStack(t *testing.T) {
-	_,_,err := new(Stack).popTwo()
+	_, _, err := new(Stack).popTwo()
 	if err == nil {
 		t.Error("Expected error, however, no error occurred")
 	}

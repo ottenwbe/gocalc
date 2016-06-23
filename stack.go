@@ -18,7 +18,7 @@ import "errors"
 
 // The stack data structure
 type Stack struct {
-	top  *Element
+	top *Element
 	num int
 }
 
@@ -70,5 +70,5 @@ func NewStack() *Stack {
 	stack := new(Stack)
 	stack.num = 0
 	stack.top = nil
-	return stack;
+	return stack
 }

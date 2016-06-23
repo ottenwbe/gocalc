@@ -21,17 +21,17 @@ import (
 	"strconv"
 )
 
-// Calculate the sum of a and b
+// Sum of a and b
 func sum(a float64, b float64) (float64, error) {
 	return a + b, nil
 }
 
-// Calculate the difference between a and b
+// Difference between a and b
 func diff(a float64, b float64) (float64, error) {
 	return a - b, nil
 }
 
-// Calculate the product of a and b
+// Product of a and b
 func prod(a float64, b float64) (float64, error) {
 	return a * b, nil
 }
@@ -48,6 +48,7 @@ func div(a float64, b float64) (float64, error) {
 
 // Evaluates a postfix term and returns either the result or
 // an error if the term cannot be evaluated.
+//
 // While the term is parsed values are pushed to a stack. This way,
 // operators can be evaluated by applying the operator to the topmost elements of the stack.
 func evaluate(term []string) (result float64, err error) {
@@ -60,8 +61,7 @@ func evaluate(term []string) (result float64, err error) {
 	// references to all operations
 	methods := map[string]func(float64, float64) (float64, error){"+": sum, "-": diff, "/": div, "*": prod}
 
-	// evaluate the term by iterating over all elements of the term
-	// operators trigger an evaluation, while values are pushed to the stack
+	// iterate over all elements of the term to evaluate it
 	for _, next := range term {
 		// if the next token in the term represents an operator,
 		// then execute the operation on the two topmost elements of the stack
@@ -82,13 +82,13 @@ func evaluate(term []string) (result float64, err error) {
 			// push result to the stack
 			stack.push(methodResult)
 		} else {
-			// try to convert the next string from the term to a float64
+			// try to convert the next string in the term to a float64
 			nextFloat, tmpErr := strconv.ParseFloat(next, 64)
 			if tmpErr != nil {
 				err = tmpErr
 				break //each error breaks the evaluation
 			}
-			// push the next float from the term to the stack
+			// push the next float of the term to the stack
 			stack.push(nextFloat)
 		}
 	}

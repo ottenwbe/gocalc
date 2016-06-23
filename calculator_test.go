@@ -52,7 +52,7 @@ func TestBasicProd(t *testing.T) {
 
 func TestDivByZero(t *testing.T) {
 	input := []string{"22", "0", "/"}
-	_,err := evaluate(input)
+	_, err := evaluate(input)
 	if err == nil {
 		t.Error("Expected error, however, no error occurred")
 	}
@@ -60,7 +60,7 @@ func TestDivByZero(t *testing.T) {
 
 func TestOneVal(t *testing.T) {
 	input := []string{"22", "/"}
-	_,err := evaluate(input)
+	_, err := evaluate(input)
 	if err == nil {
 		t.Error("Expected error, however, no error occurred")
 	}
@@ -68,7 +68,7 @@ func TestOneVal(t *testing.T) {
 
 func TestInvalidInput(t *testing.T) {
 	input := []string{"22", "a", "/"}
-	_,err := evaluate(input)
+	_, err := evaluate(input)
 	if err == nil {
 		t.Error("Expected error, however, no error occurred")
 	}
