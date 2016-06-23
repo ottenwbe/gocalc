@@ -1,17 +1,15 @@
 # gocalc
 Small calculator written in Go.
 
-## Usage 
-
-This initial version of the calculator relies on a postfix evaluation. 
-
-To build the project type:
+## Build
 
 ```go
 go build -o gocalc
 ```
 
-## Example
+## Usage 
+
+This initial version of the calculator relies on a postfix evaluation. 
 
 ```
 ./gocalc 5 5 +
