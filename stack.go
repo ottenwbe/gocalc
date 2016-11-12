@@ -1,3 +1,17 @@
+//Copyright 2016 Beate Ottenwälder
+//
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+//
+//http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
 package main
 
 import "errors"
@@ -37,14 +51,14 @@ func (stack *Stack) pop() (value float64, err error) {
 	return 0, errors.New("Stack Empty")
 }
 
-// Safely extract the two topmost values of the stack
-func (stack *Stack) popTwo() (v1 float64, v2 float64, err error) {
+// Safely extract the two topmost elements of the stack
+func (stack *Stack) popTwo() (secondToTop float64, topElement float64, err error) {
 	err = nil
-	v1, v2 = 0, 0
+	secondToTop, topElement = 0, 0
 	if stack.size() > 1 {
 		// we can safely ignore the errors due to the length check
-		v2, _ = stack.pop()
-		v1, _ = stack.pop()
+		topElement, _ = stack.pop()
+		secondToTop, _ = stack.pop()
 	} else {
 		err = errors.New("Not enough arguments")
 	}
