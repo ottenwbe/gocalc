@@ -1,4 +1,8 @@
 # gocalc
+
+ [![Build Status](https://travis-ci.org/ottenwbe/gocalc.svg?branch=master)](https://travis-ci.org/ottenwbe/gocalc)
+ [![codecov](https://codecov.io/gh/ottenwbe/gocalc/branch/master/graph/badge.svg)](https://codecov.io/gh/ottenwbe/gocalc)
+ 
 Small calculator written in Go.
 
 ## Build
@@ -13,8 +17,4 @@ This initial version of the calculator relies on a postfix evaluation.
 
 ```
 ./gocalc 5 5 +
-```
-
-## Status
-
-[![Build Status](https://travis-ci.org/ottenwbe/gocalc.svg?branch=master)](https://travis-ci.org/ottenwbe/gocalc)
+``` 
