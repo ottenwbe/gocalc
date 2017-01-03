@@ -1,9 +1,10 @@
 language: go
 
-go:
+go: 
   - 1.5
   - 1.6
-
+  - 1.7
+  
 before_script:
   # static code analysis
   - go vet
