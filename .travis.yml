@@ -10,5 +10,7 @@ before_script:
   - go vet
 
 script:
-  # unit tests
-  - go test
+  - go test -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
