@@ -67,8 +67,9 @@ func (stack *Stack) popTwo() (secondToTop float64, topElement float64, err error
 
 // Construct a stack
 func NewStack() *Stack {
-	stack := new(Stack)
-	stack.num = 0
-	stack.top = nil
+	stack := &Stack{
+		num: 0,
+		top: nil,
+	}
 	return stack
 }

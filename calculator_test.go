@@ -73,3 +73,19 @@ func TestInvalidInput(t *testing.T) {
 		t.Error("Expected error, however, no error occurred")
 	}
 }
+
+func TestEmptyInput(t *testing.T) {
+	input := []string{}
+	_, err := evaluate(input)
+	if err == nil {
+		t.Error("Expected error, however, no error occurred")
+	}
+}
+
+func TestOnlyNumbersAsInput(t *testing.T) {
+	input := []string{"1", "1"}
+	_, err := evaluate(input)
+	if err == nil {
+		t.Error("Expected error, however, no error occurred")
+	}
+}
