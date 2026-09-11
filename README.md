@@ -1,6 +1,6 @@
 # gocalc
 
- [![Build Status](https://travis-ci.org/ottenwbe/gocalc.svg?branch=master)](https://travis-ci.org/ottenwbe/gocalc)
+[![CI](https://github.com/ottenwbe/gocalc/actions/workflows/ci.yml/badge.svg)](https://github.com/ottenwbe/gocalc/actions/workflows/ci.yml)
  [![codecov](https://codecov.io/gh/ottenwbe/gocalc/branch/master/graph/badge.svg)](https://codecov.io/gh/ottenwbe/gocalc)
  
 Small calculator written in Go.
