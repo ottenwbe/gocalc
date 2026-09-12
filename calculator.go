@@ -22,18 +22,21 @@ import (
 )
 
 // Sum of a and b
-func sum(a float64, b float64) (float64, error) {
-	return a + b, nil
+// A pure operation: it cannot fail, so it does not return an error.
+func sum(a float64, b float64) float64 {
+	return a + b
 }
 
 // Difference between a and b
-func diff(a float64, b float64) (float64, error) {
-	return a - b, nil
+// A pure operation: it cannot fail, so it does not return an error.
+func diff(a float64, b float64) float64 {
+	return a - b
 }
 
 // Product of a and b
-func prod(a float64, b float64) (float64, error) {
-	return a * b, nil
+// A pure operation: it cannot fail, so it does not return an error.
+func prod(a float64, b float64) float64 {
+	return a * b
 }
 
 // Divide a by b
@@ -51,21 +54,23 @@ func div(a float64, b float64) (float64, error) {
 // While the term is parsed values are pushed to a stack. This way,
 // operators can be evaluated by applying the operator to the topmost elements of the stack.
 func evaluate(term []string) (result float64, err error) {
-	// by default, no error is returned
-	err = nil
-	// the default result
-	result = 0.0
+	// NOTE: The following two lines are intentionally commented out as a teaching
+	// moment. Named return values (result, err) are already initialized to their
+	// zero values (0.0 and nil) by Go, so reassigning them here is redundant.
+	// err = nil
+	// result = 0.0
 	// the stack which allows us to evaluate the postfix term
 	stack := NewStack()
-	// references to all operations
-	methods := map[string]func(float64, float64) (float64, error){"+": sum, "-": diff, "/": div, "*": prod}
+	// references to the pure operations that cannot fail. Division is handled
+	// separately below because it can return an error.
+	pureMethods := map[string]func(float64, float64) float64{"+": sum, "-": diff, "*": prod}
 
 	// iterate over all elements of the term to evaluate it
 	for _, next := range term {
 		// if the next token in the term represents an operator,
 		// then execute the operation on the two topmost elements of the stack
 		// and push the result to the stack
-		if method, ok := methods[next]; ok {
+		if method, ok := pureMethods[next]; ok {
 			// extract the first two values from stack
 			v1, v2, tmpErr := stack.popTwo()
 			if tmpErr != nil {
@@ -73,12 +78,19 @@ func evaluate(term []string) (result float64, err error) {
 				break //each error breaks the evaluation
 			}
 			// execute operation on the extracted values
-			methodResult, tmpErr := method(v1, v2)
+			stack.push(method(v1, v2))
+		} else if next == "/" {
+			// division can fail (division by zero), so it is handled separately
+			v1, v2, tmpErr := stack.popTwo()
 			if tmpErr != nil {
 				err = tmpErr
 				break //each error breaks the evaluation
 			}
-			// push result to the stack
+			methodResult, tmpErr := div(v1, v2)
+			if tmpErr != nil {
+				err = tmpErr
+				break //each error breaks the evaluation
+			}
 			stack.push(methodResult)
 		} else {
 			// try to convert the next string in the term to a float64

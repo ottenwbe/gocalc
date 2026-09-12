@@ -5,6 +5,10 @@
  
 Small calculator written in Go.
 
+## Purpose
+
+This repository exists for learning and teaching Go. It is not intended for production use; the goal is to demonstrate idiomatic Go and keep the code approachable for newcomers.
+
 ## Build
 
 ```go

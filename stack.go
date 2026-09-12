@@ -53,7 +53,10 @@ func (stack *Stack) pop() (value float64, err error) {
 
 // Safely extract the two topmost elements of the stack
 func (stack *Stack) popTwo() (secondToTop float64, topElement float64, err error) {
-	err = nil
+	// NOTE: The following line is intentionally commented out as a teaching
+	// moment. Named return values are already initialized to their zero values
+	// by Go (0 and nil), so reassigning them here is redundant.
+	// err = nil
 	secondToTop, topElement = 0, 0
 	if stack.size() > 1 {
 		// we can safely ignore the errors due to the length check
