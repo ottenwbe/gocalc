@@ -21,4 +21,16 @@ This initial version of the calculator relies on a postfix evaluation.
 
 ```
 ./gocalc 5 5 +
-``` 
+```
+
+## How it works
+
+`gocalc` evaluates terms in **postfix** notation: the operator comes *after* its operands, so no parentheses or precedence rules are needed. Reading left to right, numbers are pushed onto a stack; when an operator is encountered, the top two stack values are popped, the operator is applied, and the result is pushed back.
+
+Example: `5 3 +` → push 5, push 3, apply `+` → result `8`. A longer term `2 3 + 4 *` means `(2 + 3) * 4` = `20`.
+
+## Tests
+
+```
+go test ./...
+```
