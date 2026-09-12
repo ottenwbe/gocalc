@@ -33,3 +33,7 @@ Example: `5 3 +` → push 5, push 3, apply `+` → result `8`. A longer term `2 
 ```
 go test ./...
 ```
+
+## Notes
+
+This repository was also used to test the capabilities of Vibe Code, Mistral AI's async software-engineering agent, which performed the cleanup and modernization of this project.
