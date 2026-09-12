@@ -39,11 +39,10 @@ func prod(a float64, b float64) (float64, error) {
 // Divide a by b
 // Returns a division by zero error when b is 0
 func div(a float64, b float64) (float64, error) {
-	if b != 0 {
-		return a / b, nil
-	} else {
-		return 0, errors.New("Divison by zero")
+	if b == 0 {
+		return 0, errors.New("Division by zero")
 	}
+	return a / b, nil
 }
 
 // Evaluates a postfix term and returns either the result or
@@ -111,13 +110,17 @@ func main() {
 
 	// Get all command line arguments, except for the first one---the program.
 	// The command line arguments represent the postfix term that needs to be evaluated.
+	if len(os.Args) < 2 {
+		fmt.Fprintln(os.Stderr, "Usage: gocalc <postfix term>")
+		os.Exit(1)
+	}
 	term := os.Args[1:]
 
 	// Evaluate the postfix term
 	result, err := evaluate(term)
 	if err == nil {
-		fmt.Println(fmt.Sprintf("%s = %f\n", term, result))
+		fmt.Printf("%s = %f\n", term, result)
 	} else {
-		fmt.Println(fmt.Sprintf("Term cannot be evaluated: %s", err))
+		fmt.Printf("Term cannot be evaluated: %s\n", err)
 	}
 }
