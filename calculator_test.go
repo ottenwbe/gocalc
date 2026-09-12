@@ -18,74 +18,43 @@ import (
 	"testing"
 )
 
-func TestBasicSum(t *testing.T) {
-	input := []string{"1", "1", "+"}
-	result, _ := evaluate(input)
-	if result != 2 {
-		t.Error("Expected 2 got ", result)
+func TestEvaluate(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   []string
+		want    float64
+		wantErr bool
+	}{
+		{"sum", []string{"1", "1", "+"}, 2, false},
+		{"diff", []string{"3", "2", "-"}, 1, false},
+		{"div", []string{"22", "2", "/"}, 11, false},
+		{"prod", []string{"2", "5", "*"}, 10, false},
+		{"div by zero", []string{"22", "0", "/"}, 0, true},
+		{"one value", []string{"22", "/"}, 0, true},
+		{"invalid input", []string{"22", "a", "/"}, 0, true},
+		{"empty input", []string{}, 0, true},
+		{"only numbers", []string{"1", "1"}, 0, true},
+		// multi-operator term: (2 + 3) * 4 = 20
+		{"multi-op", []string{"2", "3", "+", "4", "*"}, 20, false},
+		// negative intermediate result: 3 - 5 = -2
+		{"negative", []string{"3", "5", "-"}, -2, false},
 	}
-}
 
-func TestBasicDiff(t *testing.T) {
-	input := []string{"3", "2", "-"}
-	result, _ := evaluate(input)
-	if result != 1 {
-		t.Error("Expected 1 got ", result)
-	}
-}
-
-func TestBasicDiv(t *testing.T) {
-	input := []string{"22", "2", "/"}
-	result, _ := evaluate(input)
-	if result != 11 {
-		t.Error("Expected 11 got ", result)
-	}
-}
-
-func TestBasicProd(t *testing.T) {
-	input := []string{"2", "5", "*"}
-	result, _ := evaluate(input)
-	if result != 10 {
-		t.Error("Expected 10 got ", result)
-	}
-}
-
-func TestDivByZero(t *testing.T) {
-	input := []string{"22", "0", "/"}
-	_, err := evaluate(input)
-	if err == nil {
-		t.Error("Expected error, however, no error occurred")
-	}
-}
-
-func TestOneVal(t *testing.T) {
-	input := []string{"22", "/"}
-	_, err := evaluate(input)
-	if err == nil {
-		t.Error("Expected error, however, no error occurred")
-	}
-}
-
-func TestInvalidInput(t *testing.T) {
-	input := []string{"22", "a", "/"}
-	_, err := evaluate(input)
-	if err == nil {
-		t.Error("Expected error, however, no error occurred")
-	}
-}
-
-func TestEmptyInput(t *testing.T) {
-	input := []string{}
-	_, err := evaluate(input)
-	if err == nil {
-		t.Error("Expected error, however, no error occurred")
-	}
-}
-
-func TestOnlyNumbersAsInput(t *testing.T) {
-	input := []string{"1", "1"}
-	_, err := evaluate(input)
-	if err == nil {
-		t.Error("Expected error, however, no error occurred")
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result, err := evaluate(tt.input)
+			if tt.wantErr {
+				if err == nil {
+					t.Errorf("expected error, got nil")
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+			if result != tt.want {
+				t.Errorf("got %v, want %v", result, tt.want)
+			}
+		})
 	}
 }

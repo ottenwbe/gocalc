@@ -32,7 +32,7 @@ func TestStackPushPop(t *testing.T) {
 	stack.push(testVal)
 	resultVal, _ := stack.pop()
 	if resultVal != testVal {
-		t.Error("Expected error, however, no error occurred")
+		t.Errorf("expected %v, got %v", testVal, resultVal)
 	}
 }
 
